@@ -9,7 +9,7 @@ django.setup()
 
 # do Updating
 from datetime import datetime
-import json
+import json,urllib2,sys
 from timeline.models import News
 
 def insertJson(searchResult):
@@ -21,16 +21,35 @@ def insertJson(searchResult):
 		datestring = re.search('/t([0-9]{8})_',link).group(1)
 		dateTime = datetime.strptime(datestring,"%Y%m%d")
 
+		if News.objects.filter(cache=cache).exists():
+			continue
+			
 		#print cache,title,link,snippet,dateTime
 		newsObject = News(title = title, cache = cache, link = link, snippet = snippet, dateTime= dateTime)
 		try:
 			newsObject.save()
+			print u"Insert: %s" % title
 		except Exception, e:
 			print e
 
+"""
 for page in range(1,11):
 	searchResult = json.load(open("../htmltest/%d.json" % page))
 	insertJson(searchResult)
+"""
+
+baseurl = "https://www.googleapis.com/customsearch/v1?cx=011796648310020391649%3Antkstgdw2uo&q=%E9%BB%84%E5%90%AF%E5%93%B2&dateRestrict=d2"
+
+key = sys.argv[1]
+url = baseurl + "&key=%s" % key
+
+try:
+	respond = urllib2.urlopen(url).read()
+	searchResult = json.loads(respond)
+except urllib2.URLError, e:
+	print e
+
+insertJson(searchResult)
 
 
 
