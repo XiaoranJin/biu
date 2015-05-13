@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>News from Huang Qizhe</title>
+<link rel="stylesheet" href="/static/css/demo.css" type="text/css" media="screen">
+<link rel="stylesheet" href="/static/css/timeliner.css" type="text/css" media="screen">
+<link rel="stylesheet" href="/static/css/responsive.css" type="text/css" media="screen">
+
+</head>
+<body>
+<div class="container">
+<h1>黄启哲</h1>
+<br>
+<hr></hr>
+<div id="timeline" class="timeline-container">
+<button class="timeline-toggle">+ expand all</button>
+
+{% for month in monthlyCluster %}
+<div class="timeline-wrapper">
+<h2 class="timeline-time"><span>{{ month.date }}</span></h2>
+<dl class="timeline-series">
+{% for post in month.content %}
+<dt id="{{ post.cache }}" class="timeline-event">
+<a>{{ post.title }}</a>
+</dt>
+<dd class="timeline-event-content" id="{{ post.cache }}EX">
+<h3>{{ post.dateTime|date:"Y-m-d" }}</h3>
+<p><a href="{{ post.link }}">
+{{ post.snippet }}
+</a></p>
+
+</dd> 
+{% endfor %}
+</dl> 
+</div>
+{% endfor %}
+</div>
+<p>&nbsp;</p>
+<br>
+<br>
+</div>
+ 
+<script src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://technotarek.com/timeliner/inc/colorbox.js"></script>
+<script type="text/javascript" src="/static/js/timeliner.js"></script>
+<script>
+		$(document).ready(function() {
+			$.timeliner({
+				startOpen:['#19550828', '#19630828'],
+			});
+			$.timeliner({
+				timelineContainer: '#timeline-js',
+				timelineSectionMarker: '.milestone',
+				oneOpen: true,
+				startState: 'flat',
+				expandAllText: '+ Show All',
+				collapseAllText: '- Hide All'
+			});
+			// Colorbox Modal
+			$(".CBmodal").colorbox({inline:true, initialWidth:100, maxWidth:682, initialHeight:100, transition:"elastic",speed:750});
+		});
+	</script>
+</body>
+</html>
