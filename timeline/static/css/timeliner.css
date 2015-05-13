@@ -62,11 +62,11 @@
   white-space: nowrap;
 }
 .timeline-series dt a {
-  color: #999;
+  color: #737373;
   cursor: pointer;
 }
 .timeline-series dt a .closed {
-  color: #999;
+  color: #737373;
   font-size: 1em;
   margin-left: 0;
 }
@@ -81,7 +81,7 @@
   width: 100%;
 }
 .timeline-series dd h3 {
-  color: #FFF;
+  color: #a6a6a6;
   clear: both;
   float: left;
   font-size: 1.5em;
