@@ -21,7 +21,7 @@ def insertJson(searchResult):
 		datestring = re.search('/t([0-9]{8})_',link).group(1)
 		dateTime = datetime.strptime(datestring,"%Y%m%d")
 
-		if News.objects.filter(cache=cache).exists():
+		if News.objects.filter(title=title).exists():
 			continue
 			
 		#print cache,title,link,snippet,dateTime
